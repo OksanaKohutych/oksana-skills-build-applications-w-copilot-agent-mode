@@ -7,6 +7,10 @@
     "doc": "docs"
   },
   "scripts": {
+    "dev:frontend": "npm --prefix octofit-tracker/frontend run dev -- --host 0.0.0.0 --port 5173",
+    "dev:backend": "npm --prefix octofit-tracker/backend run dev",
+    "build": "npm --prefix octofit-tracker/frontend run build",
+    "start:backend": "npm --prefix octofit-tracker/backend run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
