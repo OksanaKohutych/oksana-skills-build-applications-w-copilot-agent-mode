@@ -12,8 +12,45 @@ const baseUrl = codespaceName
   ? `https://${codespaceName}-8000.app.github.dev`
   : 'http://localhost:8000';
 
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  const allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://127.0.0.1:5173',
+    'http://127.0.0.1:5174',
+    `https://${codespaceName}-5173.app.github.dev`,
+    `https://${codespaceName}-5174.app.github.dev`,
+    `https://${codespaceName}-8000.app.github.dev`,
+  ].filter(Boolean);
+
+  if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else if (!origin) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  }
+
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+
+  next();
+});
+
 app.use(express.json());
 app.use('/api', apiRoutes);
+
+app.get('/', (_req, res) => {
+  res.json({
+    message: 'OctoFit Tracker API',
+    endpoints: ['/api/users', '/api/activities', '/api/teams', '/api/leaderboard', '/api/workouts'],
+    baseUrl,
+  });
+});
 
 app.get('/api/config', (_req, res) => {
   res.json({
