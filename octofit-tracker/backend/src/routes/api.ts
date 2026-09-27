@@ -7,7 +7,7 @@ import { Workout } from '../models/Workout.js';
 
 const router = express.Router();
 
-router.get('/users', async (_req, res) => {
+router.get('/users/', async (_req, res) => {
   try {
     const users = await User.find().lean();
     res.json(users);
@@ -17,7 +17,7 @@ router.get('/users', async (_req, res) => {
   }
 });
 
-router.get('/activities', async (_req, res) => {
+router.get('/activities/', async (_req, res) => {
   try {
     const activities = await Activity.find().lean();
     res.json(activities);
@@ -27,7 +27,7 @@ router.get('/activities', async (_req, res) => {
   }
 });
 
-router.get('/teams', async (_req, res) => {
+router.get('/teams/', async (_req, res) => {
   try {
     const teams = await Team.find().lean();
     res.json(teams);
@@ -37,7 +37,7 @@ router.get('/teams', async (_req, res) => {
   }
 });
 
-router.get('/leaderboard', async (_req, res) => {
+router.get('/leaderboard/', async (_req, res) => {
   try {
     const leaderboard = await Leaderboard.find().sort({ score: -1 }).lean();
     res.json(leaderboard);
@@ -47,7 +47,7 @@ router.get('/leaderboard', async (_req, res) => {
   }
 });
 
-router.get('/workouts', async (_req, res) => {
+router.get('/workouts/', async (_req, res) => {
   try {
     const workouts = await Workout.find().lean();
     res.json(workouts);

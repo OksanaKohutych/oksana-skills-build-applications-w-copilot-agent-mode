@@ -47,7 +47,7 @@ app.use('/api', apiRoutes);
 app.get('/', (_req, res) => {
   res.json({
     message: 'OctoFit Tracker API',
-    endpoints: ['/api/users', '/api/activities', '/api/teams', '/api/leaderboard', '/api/workouts'],
+    endpoints: ['/api/users/', '/api/activities/', '/api/teams/', '/api/leaderboard/', '/api/workouts/'],
     baseUrl,
   });
 });

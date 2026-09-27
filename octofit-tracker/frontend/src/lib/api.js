@@ -9,7 +9,7 @@ export function getApiHost() {
 }
 
 export function buildApiUrl(resource) {
-  return `${getApiHost()}/api/${resource}`;
+  return `${getApiHost()}/api/${resource}/`;
 }
 
 export function normalizeApiResponse(payload) {
