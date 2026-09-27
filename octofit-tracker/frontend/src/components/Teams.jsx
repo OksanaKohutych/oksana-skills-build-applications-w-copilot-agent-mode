@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { buildApiUrl, normalizeApiResponse } from '../lib/api';
+import { getApiHost, normalizeApiResponse } from '../lib/api';
+
+const apiEndpoint = '/api/teams/';
 
 function Teams() {
   const [items, setItems] = useState([]);
@@ -11,7 +13,7 @@ function Teams() {
 
     async function loadTeams() {
       try {
-        const response = await fetch(buildApiUrl('teams'), { signal: controller.signal });
+        const response = await fetch(`${getApiHost()}${apiEndpoint}`, { signal: controller.signal });
         if (!response.ok) {
           throw new Error(`Request failed with status ${response.status}`);
         }

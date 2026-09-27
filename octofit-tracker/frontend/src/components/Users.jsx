@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { buildApiUrl, normalizeApiResponse } from '../lib/api';
+import { getApiHost, normalizeApiResponse } from '../lib/api';
+
+const apiEndpoint = '/api/users/';
 
 function Users() {
   const [items, setItems] = useState([]);
@@ -11,7 +13,7 @@ function Users() {
 
     async function loadUsers() {
       try {
-        const response = await fetch(buildApiUrl('users'), { signal: controller.signal });
+        const response = await fetch(`${getApiHost()}${apiEndpoint}`, { signal: controller.signal });
         if (!response.ok) {
           throw new Error(`Request failed with status ${response.status}`);
         }
